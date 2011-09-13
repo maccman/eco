@@ -75,6 +75,15 @@ module.exports =
     ]
     test.same fixture("projects.out.2"), output
     test.done()
+    
+  "rendering project.eco with an array": (test) ->
+    output = eco.render fixture("project.eco"), [
+      { name: "PowerTMS Active Shipments Page Redesign", url: "/projects/1" },
+      { name: "SCU Intranet", url: "/projects/2", description: "<p><em>On hold</em></p>" },
+      { name: "Sales Template", url: "/projects/3" }
+    ]
+    test.same fixture("project.out.1"), output
+    test.done()
 
   "rendering helpers.eco": (test) ->
     output = eco.render fixture("helpers.eco"),

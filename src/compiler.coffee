@@ -8,6 +8,12 @@ exports.precompile = precompile = (source) ->
   """
     function(__obj) {
       if (!__obj) __obj = {};
+      if (Object.prototype.toString.call(__obj) == '[object Array]') {
+        var result = [];
+        for (var i = 0; i < __obj.length; i++)
+          result.push(arguments.callee.call(this, __obj[i]));
+        return result.join('');
+      }      
       var __out = [], __capture = function(callback) {
         var out = __out, result;
         __out = [];
